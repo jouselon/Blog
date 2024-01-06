@@ -1,8 +1,10 @@
 import React from 'react';
 import './App.css';
 import BoardItem from "./components/BoardItem";
-import {latestBoardListMock, top3BoardListMock} from "./mocks";
+import {commentListMock, favoriteListMock, latestBoardListMock, top3BoardListMock} from "./mocks";
 import Top3Item from "./components/Top3Item";
+import CommentListItem from "./components/CommentItem";
+import FavoriteItem from "./components/FavoriteItem";
 
 function App() {
   return (
@@ -13,6 +15,13 @@ function App() {
 
           {latestBoardListMock.map(boardListItem => <BoardItem boardListItem={boardListItem}/>)}
 
+          <div style={{padding: '0 20px', display: 'flex', flexDirection: 'column', gap: '30px'}}>
+              {commentListMock.map(commentListItem=><CommentListItem commentListItem={commentListItem}/>)}
+          </div>
+
+          <div style={{display: 'flex', columnGap: '30px', rowGap: '20px'}}>
+              {favoriteListMock.map(favoriteListItem =><FavoriteItem favoriteListItem={favoriteListItem}/>)}
+          </div>
       </>
   );
 }

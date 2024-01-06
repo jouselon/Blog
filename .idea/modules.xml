@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/blog_intelliJ.iml" filepath="$PROJECT_DIR$/.idea/blog_intelliJ.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/board-back.main.iml" filepath="$PROJECT_DIR$/.idea/modules/board-back.main.iml" />
     </modules>
   </component>
 </project>

@@ -1,0 +1,46 @@
+### Basic Authentication
+
+- 사용자 이름 / 비밀번호 Base64로 인코딩하여 Authorization 헤더에 포함하여 전송됨
+- 매우 안전하지 않음, SSL/TLS와 함께 사용됨
+- Authorization : Basic ~~
+
+### Bearer Token Authentication
+
+- 헤더에 토큰을 포함하여 전송 Authorization 헤더에 포함하여 전송
+- JWT를 사용하여 인증
+- 간단한 방식, 상태를 유지하지 않음, 확정성 높음
+- 토큰 노출 위험, 토큰 관리 힘듦
+- Authorization: Bearer ~~
+
+### 0Auth
+
+- 토큰기반 인증 방식, 사용자가 직접 자격을 증명하지 않고 미리 인증 받아서 토큰을 발급받고 이 토큰을 이용해서 API를 요청하는 방식.
+- 0Auto 2.0 버전
+- 카카오 로그인, 네이버 로그인, 페이스북, 깃허브 로그인..
+
+### API Key / Session based Authentication
+
+### JWT (Json Web Token)
+
+- 클레임이라고 불리는 정보를 JSON 형태로 안전하게 전송하기 위한 토큰
+- 인정과 정보 교환에 사용
+- 서명이 되어있어 신뢰성 확보 가능
+
+- Header : 토큰의 타임과 사용된 알고리즘 정보를 담고있음. Base64Url로 인코딩
+- Payload : 클레임 정보, 대상, 발행자, 만료 시간 등 다양한 정보가 포함됨. Base64Url로 인코딩
+- Signautre : header, payload, secret key를 사용하여 생성된 성명
+- 인증할 때 사용, 정보 교환할때 사용
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/f33f9149-b000-4ddd-b448-098618280497/b07f70b8-9d43-4230-8d21-2bc3709f6f17/Untitled.png)
+
+장점
+
+- 상태 유지 하지 않는다.
+- 간단하고 자기 포함적 : 자신이 필요한 모든 정보를 자체적으로 가지고 있다.
+- 높은 확정성
+
+단점
+
+- 크기 : 클레임이 많을 수록 토큰의 크기가 커짐
+- 보안 : 서명은 되어있지만 암호화는 되어있지 않음. 중요한 정보를 JWT에 포함하면 안됨
+- 토큰 관리가 어렵다 : 만료 시간, 갱신, …

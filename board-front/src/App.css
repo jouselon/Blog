@@ -28,7 +28,7 @@
     height: 100%;
 
     background-position: 50% 50%;
-    background-size: 100% 100%;
+    background-size: cover;
 }
 
 .eye-light-off-icon{
@@ -53,4 +53,12 @@
 
 .naver-blog-icon {
     background-image: url("assests/image/naver-blog.png");
+}
+
+.logo-dark-icon {
+    background-image: url("assests/image/travlog logo.png");
+}
+
+.search-light-icon {
+    background-image: url("assests/image/search-light.png");
 }

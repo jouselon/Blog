@@ -25,4 +25,13 @@ public class ResponseDto {
     // ResponseEntity를 사용하여 HTTP 상태 코드 및 응답 본문을 설정하여 반환
     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseBody);
   }
+
+  public static ResponseEntity<ResponseDto> validationFailed() {
+
+    // ResponseDto 객체 생성
+    ResponseDto responseBody = new ResponseDto(ResponseCode.VALIDATION_FAILED, ResponseMessage.VALIDATION_FAILED);
+
+    // ResponseEntity를 사용하여 HTTP 상태 코드 및 응답 본문을 설정하여 반환
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseBody);
+  }
 }

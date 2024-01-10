@@ -1,6 +1,6 @@
 import {SignInRequestDto, SignUpRequestDto} from "./request/auth";
 import axios from "axios";
-import {SignInResponseDto} from "./response/auth";
+import {SignInResponseDto, SignUpResponseDto} from "./response/auth";
 import {Simulate} from "react-dom/test-utils";
 import error = Simulate.error;
 import {ResponseDto} from "./response";
@@ -27,6 +27,16 @@ export const signInRequest = async (requestBody: SignInRequestDto) => {
     return result;
 }
 
-export const signUpRequest = async (requestBody : SignUpRequestDto) => {
-
+export const signUpRequest = async (requestBody: SignUpRequestDto) => {
+    const result = await axios.post(SIGN_UP_URL(), requestBody)
+        .then(response => {
+            const responseBody: SignUpResponseDto = response.data;
+            return responseBody;
+        })
+        .catch(error => {
+            if (!error.response || !error.response.data) return null; // 추가된 부분
+            const responseBody: ResponseDto = error.response.data;
+            return responseBody;
+        });
+    return result;
 }

@@ -34,7 +34,7 @@ export const signUpRequest = async (requestBody: SignUpRequestDto) => {
             return responseBody;
         })
         .catch(error => {
-            if (!error.response || !error.response.data) return null; // 추가된 부분
+            if (!error.response.data) return null;
             const responseBody: ResponseDto = error.response.data;
             return responseBody;
         });

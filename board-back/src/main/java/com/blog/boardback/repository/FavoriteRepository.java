@@ -7,4 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FavoriteRepository extends JpaRepository<FavoriteEntity, FavoritePK> {
+
+  FavoriteEntity findByBoardNumberAndUserEmail(Integer boardNumber, String userEmail);
+
 }

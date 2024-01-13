@@ -1,10 +1,8 @@
 package com.blog.boardback.controller;
 
 import com.blog.boardback.dto.request.board.PostBoardRequestDto;
-import com.blog.boardback.dto.response.board.GetBoardResponseDto;
-import com.blog.boardback.dto.response.board.GetFavoriteListResponseDto;
-import com.blog.boardback.dto.response.board.PostBoardResponseDto;
-import com.blog.boardback.dto.response.board.PutFavoriteResponseDto;
+import com.blog.boardback.dto.request.board.PostCommentRequestDto;
+import com.blog.boardback.dto.response.board.*;
 import com.blog.boardback.service.BoardService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -44,6 +42,21 @@ public class BoardController {
     ResponseEntity<? super PostBoardResponseDto> response = boardService.postBoard(requestBody, email);
     return response;
   }
+
+  @PostMapping("/{boardNumber}/comment")
+  public ResponseEntity<? super PostCommentResponseDto> postComment(
+      @RequestBody @Valid PostCommentRequestDto requestBody,
+      @PathVariable("boardNumber") Integer boardNumber,
+      @AuthenticationPrincipal String email
+  ) {
+    ResponseEntity<? super PostCommentResponseDto> response = boardService.postComment(requestBody, boardNumber, email);
+    return response;
+  }
+
+
+
+
+
   @PutMapping("/{boardNumber}/favorite")
   public ResponseEntity<? super PutFavoriteResponseDto> putFavorite(
       @PathVariable("boardNumber") Integer boardNumber,

@@ -53,7 +53,13 @@ public class BoardController {
     return response;
   }
 
-
+@GetMapping("/{boardNumber}/comment-list")
+public ResponseEntity<? super GetCommentListResponseDto> getCommentList(
+    @PathVariable("boardNumber") Integer boardNumber
+) {
+    ResponseEntity<? super GetCommentListResponseDto> response = boardService.getCommentList(boardNumber);
+    return response;
+}
 
 
 

@@ -4,7 +4,7 @@ import {FavoriteListItem} from "../../types/interface";
 import defaultProfileImage from "assests/image/default-profile-image.png"
 
 interface Props {
-    favoriteListItem: FavoriteListItem
+    favoriteListItem: FavoriteListItem;
 }
 //component : Favorite List Item Component
 export default function FavoriteItem({favoriteListItem}:Props) {

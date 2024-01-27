@@ -14,6 +14,7 @@ import {getBoardRequest, increaseViewCountRequest} from "../../../apis";
 import GetBoardResponseDto from "../../../apis/response/board/get-board.response.dto";
 import ResponseDto from "../../../types/enum";
 import {IncreaseViewCountResponseDto} from "../../../apis/response/board";
+import dayjs from "dayjs";
 
 //component : 게시물 상세 화면 컴포넌트
 export default function BoardDetail(){
@@ -53,6 +54,14 @@ export default function BoardDetail(){
 
         //state : more 버튼상태
         const [showMore, setShowMore] = useState<boolean>(false);
+
+        //function : 작성일 포맷 변경 함수
+        const getWriteDateFormat = () => {
+            if (!board) return '';
+            const date = dayjs(board.writeDatetime);
+            return date.format('YYYY. MM. DD')
+        }
+
 
         //function : get board response 처리 함수
         const getBoardResponse = (responseBody:GetBoardResponseDto | ResponseDto | null ) => {
@@ -125,7 +134,7 @@ export default function BoardDetail(){
                             <div className='board-detail-writer-profile-image' style={{backgroundImage: `url(${board.writerProfileImage ? board.writerProfileImage : defaultProfileImage})`}}></div>
                             <div className='board-detail-writer-nickname' onClick={onNicknameClickHandler}>{board.writerNickname}</div>
                             <div className='board-detail-info-divider'>{'\|'}</div>
-                            <div className='board-detail-write-date'>{board.writeDatetime}</div>
+                            <div className='board-detail-write-date'>{getWriteDateFormat()}</div>
                         </div>
                         {isWriter &&
                         <div className='icon-button' onClick={onMoreButtonClickHandler}>
@@ -267,6 +276,7 @@ export default function BoardDetail(){
                     <div className='board-detail-bottom-comment-pagination-box'>
                         <Pagination />
                     </div>
+                    {loginUser !== null &&
                     <div className='board-detail-bottom-comment-input-box'>
                         <div className='board-detail-bottom-comment-input-container'>
                             <textarea ref={commentRef} className='board-detail-bottom-comment-textarea' placeholder='댓글을 작성해주세요' value={comment} onChange={onCommentChangeHandler} />
@@ -275,6 +285,7 @@ export default function BoardDetail(){
                             </div>
                         </div>
                     </div>
+                    }
                 </div>
                 }
             </div>

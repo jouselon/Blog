@@ -10,10 +10,14 @@ import {useLoginUserStore} from "../../../stores";
 import {useNavigate, useParams} from "react-router-dom";
 import {BOARD_PATH, BOARD_UPDATE_PATH, MAIN_PATH, USER_PATH} from "../../../constant";
 import boardMock from "../../../mocks/board.mock";
-import {getBoardRequest, increaseViewCountRequest} from "../../../apis";
+import {getBoardRequest, getCommentListRequest, getFavoriteListRequest, increaseViewCountRequest} from "../../../apis";
 import GetBoardResponseDto from "../../../apis/response/board/get-board.response.dto";
 import ResponseDto from "../../../types/enum";
-import {IncreaseViewCountResponseDto} from "../../../apis/response/board";
+import {
+    GetCommentListResponseDto,
+    GetFavoriteListResponseDto,
+    IncreaseViewCountResponseDto
+} from "../../../apis/response/board";
 import dayjs from "dayjs";
 
 //component : 게시물 상세 화면 컴포넌트
@@ -176,6 +180,36 @@ export default function BoardDetail(){
         //state : 댓글상태
         const [comment, setComment] = useState<string>('');
 
+        //function : get favorite list response 처리 함수
+        const getFavoriteListResponse = (responseBody: GetFavoriteListResponseDto | ResponseDto | null) => {
+            if (!responseBody) return;
+            const { code } = responseBody;
+            if (code === 'NB') alert('존재하지 않는 게시물입니다.');
+            if (code === 'DBE') alert('데이터베이스 오류입니다.');
+            if (code !== 'SU') return;
+
+            const {favoriteList} = responseBody as GetFavoriteListResponseDto;
+            setFavoriteList(favoriteList);
+            if (!loginUser){
+                setFavorite(false);
+                return;
+            }
+            const isFavorite = favoriteList.findIndex(favorite => favorite.email === loginUser.email) !== -1;
+            setFavorite(isFavorite);
+        }
+
+        //function: get comment list response 처리 함수
+        const getCommentListResponse = (responseBody: GetCommentListResponseDto | ResponseDto | null) =>{
+            if (!responseBody) return;
+            const { code } = responseBody;
+            if (code === 'NB') alert('존재하지 않는 게시물입니다.');
+            if (code === 'DBE') alert('데이터베이스 오류입니다.');
+            if (code !== 'SU') return;
+
+            const { commentList } = responseBody as GetCommentListResponseDto;
+            setCommentList(commentList);
+        }
+
 
         //event handler : 좋아요 클릭 이벤트 처리
         const onFavoriteClickHandler = () => {
@@ -213,8 +247,9 @@ export default function BoardDetail(){
 
         //effect : 게시물 번호 path variable이 바뀔 때 마다 좋아요 및 댓글 리스트 불러오기
         useEffect(() => {
-            setFavoriteList(favoriteListMock);
-            setCommentList(commentListMock);
+            if (!boardNumber) return;
+            getFavoriteListRequest(boardNumber).then(getFavoriteListResponse);
+            getCommentListRequest(boardNumber).then(getCommentListResponse);
         }, [boardNumber]);
 
 

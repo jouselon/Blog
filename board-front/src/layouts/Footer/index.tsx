@@ -39,7 +39,7 @@ export default function Footer(){
                 </div>
                 <div className='footer-bottom'>
                     <div className='footer-copyright'>
-                        {'Copyright ⓒ 2022 Travlog. All Rights Reserved.'}
+                        {'Copyright ⓒ 2024 Travlog. All Rights Reserved.'}ㅋ
                     </div>
                 </div>
 

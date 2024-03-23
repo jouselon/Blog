@@ -108,6 +108,15 @@
     justify-content: center;
 }
 
+.icon-box-small {
+    width: 16px;
+    height: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .icon-button {
     border-radius: 50% 50%;
     width: 24px;
@@ -138,6 +147,14 @@
 
 .eye-light-on-icon{
     background-image: url("assests/image/eye-light-on.png");
+}
+
+.expand-left-icon{
+    background-image: url("assests/image/expand-left.png");
+}
+
+.expand-right-icon{
+    background-image: url("assests/image/expand-right.png");
 }
 
 .expand-right-light-icon{
